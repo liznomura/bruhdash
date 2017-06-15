@@ -7,41 +7,61 @@ var global = window || GLOBAL;
  * documentation up in a browser window at all times when working on projects!          *
  ****************************************************************************************/
 
-global.bruhdash = {
+ global.bruhdash = {
 
   // returns the first element of an array
-  first: function () {
-      
+  first: function(array) {
+    return array.shift();
   },
+
+  /* this works too! */
+  // first: function (array) {
+  //   return array[0];
+  // },
 
   // returns the last element of an array
-  last: function () {
-
+  last: function (array) {
+    return array.pop();
   },
 
   // returns the index of the first matching element from left to right
-  indexOf: function () {
-
+  indexOf: function (array, n) {
+    for (i = 0; i < array.length; i++) {
+      if (n === array[i]) {
+        return i;
+      }
+    }
+    return -1;
   },
 
-  // returns the index of the first matching element from left to right
-  lastIndexof: function () {
-
-  },
+  // returns the index of the first matching element from right to left
+  // lastIndexOf: function (array, n) {
+  //   for (var i = array.length - 1; i >= array.length; i--) {
+  //     if (n === array[i]) {
+  //       return i;
+  //     }
+  //   }
+  //   return -1;
+  // },
 
   // returns an array with all elements except for the last element
-  initial: function () {
-
+  initial: function (array) {
+    array.pop();
+    return array;
   },
-  
+
   // returns an array with all falsey values removed
-  compact: function() {
-
-  },
+  compact: function(array) {
+    return array.filter(Boolean);
+},
 
   // creates a slice of an array from the start index up to but not including the end index
-  slice: function () {
-
+  slice: function (array, x, y) {
+    var res = [];
+    for (i = x; i < y; i++) {
+      res.push(array[i]);
+    }
+    return res;
   },
 
   // returns a slice of array with n elements dropped from the beignning
@@ -92,7 +112,7 @@ global.bruhdash = {
 
   /*******************
    *  STRETCH GOALS! *
-   *******************/ 
+   *******************/
 
   // creates an array of grouped elements
   zip: function () {
@@ -123,7 +143,7 @@ global.bruhdash = {
 
   /*************************
    *  SUPER STRETCH GOALS!  *
-   *************************/ 
+   *************************/
 
   // iterates over elements of a collection and returns all elements that the predicate returns truthy for
   // Note: this should work for arrays and objects
@@ -135,6 +155,6 @@ global.bruhdash = {
   // in the collection through an iteratee
   // Note: this should work for arrays and objects
   reduce: function() {
-    
+
   }
 };
