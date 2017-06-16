@@ -35,14 +35,14 @@ var global = window || GLOBAL;
   },
 
   // returns the index of the first matching element from right to left
-  // lastIndexOf: function (array, n) {
-  //   for (var i = array.length - 1; i >= array.length; i--) {
-  //     if (n === array[i]) {
-  //       return i;
-  //     }
-  //   }
-  //   return -1;
-  // },
+  lastIndexOf: function (array, n) {
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (array[i] === n) {
+        return i;
+      }
+    }
+    return -1;
+  },
 
   // returns an array with all elements except for the last element
   initial: function (array) {
@@ -65,8 +65,17 @@ var global = window || GLOBAL;
   },
 
   // returns a slice of array with n elements dropped from the beignning
-  drop: function(){
-
+  drop: function(array, n){
+    var res = [];
+    for (i = 0; i < array.length; i++) {
+      if (i > n - 1) {
+        res.push(array[i]);
+      } else if(n === undefined){
+        array.shift();
+        return array;
+      }
+    }
+    return res;
   },
 
   // returns a slice of array with n elements dropped from the end

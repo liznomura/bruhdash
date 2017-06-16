@@ -23,10 +23,10 @@ describe("#indexOf", function() {
 
 describe("#lastIndexOf", function() {
   it('should return index of first value matched from right to left', function() {
-    assert.deepEqual(bruhdash.lastIndexOf([1,2,3], 2), 1)
+    assert.deepEqual(bruhdash.lastIndexOf([1,2,3], 2), 1);
   })
   it('should return -1 if value cannot be found in array', function() {
-    assert.deepEqual(bruhdash.lastIndexOf([1,2,3], 4), -1);
+    assert.deepEqual(bruhdash.lastIndexOf([1,2,3,1], 4), -1);
   })
 })
 
