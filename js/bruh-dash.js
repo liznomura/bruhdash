@@ -79,8 +79,16 @@ var global = window || GLOBAL;
   },
 
   // returns a slice of array with n elements dropped from the end
-  dropRight: function() {
-
+  dropRight: function(array, n) {
+      if (n === 0) {
+        return array;
+      } else if (n === undefined){
+        array.pop();
+        return array;
+      } else {
+        array.splice(array.length - n, n);
+        return array;
+      }
   },
 
   // creates a slice of an array with n elements taken from the beginning
