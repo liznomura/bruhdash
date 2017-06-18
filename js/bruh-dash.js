@@ -92,7 +92,17 @@ var global = window || GLOBAL;
   },
 
   // creates a slice of an array with n elements taken from the beginning
-  take: function () {
+  take: function (array, n) {
+    if (n > array.length) {
+      return array;
+    } else if (n === 0) {
+      array = [];
+      return array;
+    } else if (n === undefined) {
+      return array.slice(0,1);
+    } else {
+      return array.slice(0, n);
+    }
 
   },
 
