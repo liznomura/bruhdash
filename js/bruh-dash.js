@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 var global = window || GLOBAL;
 
 /****************************************************************************************
@@ -53,7 +54,7 @@ var global = window || GLOBAL;
   // returns an array with all falsey values removed
   compact: function(array) {
     return array.filter(Boolean);
-},
+  },
 
   // creates a slice of an array from the start index up to but not including the end index
   slice: function (array, x, y) {
@@ -80,15 +81,15 @@ var global = window || GLOBAL;
 
   // returns a slice of array with n elements dropped from the end
   dropRight: function(array, n) {
-      if (n === 0) {
-        return array;
-      } else if (n === undefined){
-        array.pop();
-        return array;
-      } else {
-        array.splice(array.length - n, n);
-        return array;
-      }
+    if (n === 0) {
+      return array;
+    } else if (n === undefined){
+      array.pop();
+      return array;
+    } else {
+      array.splice(array.length - n, n);
+      return array;
+    }
   },
 
   // creates a slice of an array with n elements taken from the beginning
@@ -123,8 +124,18 @@ var global = window || GLOBAL;
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
-  fill: function() {
-
+  fill: function(array, value, startNum, endNum) {
+    for(i = 0; i < array.length; i++) {
+      if(startNum === undefined && endNum === undefined) {
+        array[i] = value;
+      } else {
+        while (i >= startNum && i < endNum) {
+          array[i] = value;
+          break;
+        }
+      }
+    }
+    return array;
   },
 
   // removes all given values from an array
