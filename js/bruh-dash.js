@@ -139,8 +139,13 @@ var global = window || GLOBAL;
   },
 
   // removes all given values from an array
-  pull: function () {
-
+  pull: function (array, valueArray) {
+    for(i = 0; i < array.length; i++) {
+      for (j = 0; j < valueArray.length; j++) {
+        array.splice(i, 1);
+      }
+    }
+    return array;
   },
 
   // removes elements of an array corresponding to the given indices
