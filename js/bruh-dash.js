@@ -107,8 +107,18 @@ var global = window || GLOBAL;
   },
 
   // creates a slice of an array with n elements taken from the end
-  takeRight: function () {
-
+  takeRight: function (array, n) {
+    if (n > array.length) {
+      return array;
+    } else if (n === 0) {
+      array = [];
+      return array;
+    } else if (n === undefined) {
+      return array.splice(array.length - 1, 1);
+    } else {
+      return array.splice(array.length - n, n);
+    }
+    console.log(array.pop());
   },
 
   // fills elements of array with specified value from the start index
