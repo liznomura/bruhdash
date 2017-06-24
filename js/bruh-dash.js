@@ -199,8 +199,16 @@ var global = window || GLOBAL;
   },
 
   // creates an array of grouped elements in their pre-zip configuration
-  unzip: function () {
-
+  unzip: function (arr) {
+    let newArr = [];
+    for(i = 0; i < arr[0].length; i++) {
+      let newInnerArr = [];
+      for (j = 0; j < arr.length; j++) {
+        newInnerArr.push(arr[j][i]);
+      }
+      newArr.push(newInnerArr);
+    }
+    return newArr;
   },
 
   // creates an array of elements into groups of length of specified size
