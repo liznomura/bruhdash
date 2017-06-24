@@ -151,7 +151,6 @@ var global = window || GLOBAL;
   // removes elements of an array corresponding to the given indices
   pullAt: function (arr, indexArr) {
     let newArr = [];
-    let sortedArr = ((a, b) => a - b);
     for(let i = indexArr.length - 1; i >= 0; i--) {
       newArr.push(arr[indexArr[i]]);
       arr.splice(indexArr[i], 1);
@@ -212,8 +211,21 @@ var global = window || GLOBAL;
   },
 
   // creates an array of elements into groups of length of specified size
-  chunk: function(){
-
+  chunk: function(arr, size){
+    let newArr = [];
+    if(size === 0) {
+      return newArr;
+    } else if(arr.length === 0) {
+      return newArr;
+    } else if(size === arr.length || size > arr.length) {
+      newArr.push(arr);
+      return newArr;
+    } else {
+      while(arr.length > 0){
+        newArr.push(arr.splice(0, size));
+      }
+    }
+    return newArr;
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
