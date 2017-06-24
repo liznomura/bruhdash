@@ -149,8 +149,15 @@ var global = window || GLOBAL;
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function () {
-
+  pullAt: function (array, indexArray) {
+      for (i = 0; i < array.length; i++) {
+      for(j = 0; j < indexArray.length; j++) {
+        if(indexArray[j] === i) {
+          array.splice(j, 1);
+        }
+      }
+    }
+    return array;
   },
 
   // creates an array excluding all the specified values
@@ -159,8 +166,7 @@ var global = window || GLOBAL;
   },
 
   // returns an array with specified values excluded
-  difference: function() {
-
+  difference: function(arr1, arr2) {
   },
 
   /*******************
