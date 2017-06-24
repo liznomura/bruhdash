@@ -188,8 +188,14 @@ var global = window || GLOBAL;
    *******************/
 
   // creates an array of grouped elements
-  zip: function () {
-
+  zip: function (arr1, arr2) {
+    let newArr = [];
+    for(i = 0; i < arr1.length; i++) {
+      let newArr2 = [];
+      newArr2.push(arr1[i], arr2[i]);
+      newArr.push(newArr2);
+    }
+    return newArr;
   },
 
   // creates an array of grouped elements in their pre-zip configuration
