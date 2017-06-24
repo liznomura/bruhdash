@@ -230,8 +230,17 @@ var global = window || GLOBAL;
 
   // iterates over elements of a collection and invokes iteratee for each element
   // Note: this should work for arrays and objects
-  forEach: function() {
-
+  forEach: function(clct, funct) {
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        funct(clct[i]);
+      }
+      return funct;
+    } else if(typeof clct === 'object') {
+      for(let key in clct) {
+        funct(clct[key]);
+      }
+    }
   },
 
   // creates an array of values by running each element in collection thru the iteratee
