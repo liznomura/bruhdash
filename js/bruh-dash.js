@@ -164,7 +164,7 @@ var global = window || GLOBAL;
   without: function(arr1, arr2) {
     for (i = 0; i < arr1.length; i++) {
       for (j = 0; j < arr2.length; j++) {
-        if(arr2[j] === arr1[i]) {
+        if(arr1[i] === arr2[j]) {
           arr1.splice(i, 1);
         }
       }
@@ -174,6 +174,14 @@ var global = window || GLOBAL;
 
   // returns an array with specified values excluded
   difference: function(arr1, arr2) {
+    for(i = 0; i < arr1.length; i++) {
+      for(j = 0; j < arr2.length; j++) {
+        if(arr1[i] === arr2[j]) {
+          arr1.splice(i, 1);
+        }
+      }
+    }
+    return arr1;
   },
 
   /*******************
