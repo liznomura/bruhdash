@@ -245,8 +245,19 @@ var global = window || GLOBAL;
 
   // creates an array of values by running each element in collection thru the iteratee
   // Note: this should work for arrays and objects
-  map: function() {
-
+  map: function(clct, funct) {
+    let arr = [];
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        arr.push(funct(clct[i]));
+      }
+      return arr;
+    } else if(typeof clct === 'object') {
+      for(let key in clct) {
+        arr.push(funct(clct[key]));
+      }
+      return arr;
+    }
   },
 
   /*************************
