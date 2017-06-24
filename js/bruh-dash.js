@@ -149,20 +149,27 @@ var global = window || GLOBAL;
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function (array, indexArray) {
-      for (i = 0; i < array.length; i++) {
-      for(j = 0; j < indexArray.length; j++) {
-        if(indexArray[j] === i) {
-          array.splice(j, 1);
+  // pullAt: function (array, indexArray) {
+  //   for (i = 0; i < array.length; i++) {
+  //     for(j = 0; j <= indexArray.length; j++) {
+  //       if(indexArray[j] === i) {
+  //         array.splice(i, 1);
+  //       }
+  //     }
+  //   }
+  //   return array;
+  // },
+
+  // creates an array excluding all the specified values
+  without: function(arr1, arr2) {
+    for (i = 0; i < arr1.length; i++) {
+      for (j = 0; j < arr2.length; j++) {
+        if(arr2[j] === arr1[i]) {
+          arr1.splice(i, 1);
         }
       }
     }
-    return array;
-  },
-
-  // creates an array excluding all the specified values
-  without: function() {
-
+    return arr1;
   },
 
   // returns an array with specified values excluded
