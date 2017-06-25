@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 var global = window || GLOBAL;
 
 /****************************************************************************************
@@ -7,134 +8,299 @@ var global = window || GLOBAL;
  * documentation up in a browser window at all times when working on projects!          *
  ****************************************************************************************/
 
-global.bruhdash = {
+ global.bruhdash = {
 
   // returns the first element of an array
-  first: function () {
-      
+  first: function(array) {
+    return array.shift();
   },
+
+  /* this works too! */
+  // first: function (array) {
+  //   return array[0];
+  // },
 
   // returns the last element of an array
-  last: function () {
-
+  last: function (array) {
+    return array.pop();
   },
 
   // returns the index of the first matching element from left to right
-  indexOf: function () {
-
+  indexOf: function (array, n) {
+    for (i = 0; i < array.length; i++) {
+      if (n === array[i]) {
+        return i;
+      }
+    }
+    return -1;
   },
 
-  // returns the index of the first matching element from left to right
-  lastIndexof: function () {
-
+  // returns the index of the first matching element from right to left
+  lastIndexOf: function (array, n) {
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (array[i] === n) {
+        return i;
+      }
+    }
+    return -1;
   },
 
   // returns an array with all elements except for the last element
-  initial: function () {
-
+  initial: function (array) {
+    array.pop();
+    return array;
   },
-  
-  // returns an array with all falsey values removed
-  compact: function() {
 
+  // returns an array with all falsey values removed
+  compact: function(array) {
+    return array.filter(Boolean);
   },
 
   // creates a slice of an array from the start index up to but not including the end index
-  slice: function () {
-
+  slice: function (array, x, y) {
+    var res = [];
+    for (i = x; i < y; i++) {
+      res.push(array[i]);
+    }
+    return res;
   },
 
   // returns a slice of array with n elements dropped from the beignning
-  drop: function(){
-
+  drop: function(array, n){
+    var res = [];
+    for (i = 0; i < array.length; i++) {
+      if (i > n - 1) {
+        res.push(array[i]);
+      } else if(n === undefined){
+        array.shift();
+        return array;
+      }
+    }
+    return res;
   },
 
   // returns a slice of array with n elements dropped from the end
-  dropRight: function() {
-
+  dropRight: function(array, n) {
+    if (n === 0) {
+      return array;
+    } else if (n === undefined){
+      array.pop();
+      return array;
+    } else {
+      array.splice(array.length - n, n);
+      return array;
+    }
   },
 
   // creates a slice of an array with n elements taken from the beginning
-  take: function () {
+  take: function (array, n) {
+    if (n > array.length) {
+      return array;
+    } else if (n === 0) {
+      array = [];
+      return array;
+    } else if (n === undefined) {
+      return array.slice(0,1);
+    } else {
+      return array.slice(0, n);
+    }
 
   },
 
   // creates a slice of an array with n elements taken from the end
-  takeRight: function () {
-
+  takeRight: function (array, n) {
+    if (n > array.length) {
+      return array;
+    } else if (n === 0) {
+      array = [];
+      return array;
+    } else if (n === undefined) {
+      return array.splice(array.length - 1, 1);
+    } else {
+      return array.splice(array.length - n, n);
+    }
+    console.log(array.pop());
   },
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
-  fill: function() {
-
+  fill: function(array, value, startNum, endNum) {
+    for(i = 0; i < array.length; i++) {
+      if(startNum === undefined && endNum === undefined) {
+        array[i] = value;
+      } else {
+        while (i >= startNum && i < endNum) {
+          array[i] = value;
+          break;
+        }
+      }
+    }
+    return array;
   },
 
   // removes all given values from an array
-  pull: function () {
-
+  pull: function (array, valueArray) {
+    for(i = 0; i < array.length; i++) {
+      for (j = 0; j < valueArray.length; j++) {
+        array.splice(i, 1);
+      }
+    }
+    return array;
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function () {
-
+  pullAt: function (arr, indexArr) {
+    let newArr = [];
+    for(let i = indexArr.length - 1; i >= 0; i--) {
+      newArr.push(arr[indexArr[i]]);
+      arr.splice(indexArr[i], 1);
+    }
+    return arr;
   },
 
   // creates an array excluding all the specified values
-  without: function() {
-
+  without: function(arr1, arr2) {
+    for (i = 0; i < arr1.length; i++) {
+      for (j = 0; j < arr2.length; j++) {
+        if(arr1[i] === arr2[j]) {
+          arr1.splice(i, 1);
+        }
+      }
+    }
+    return arr1;
   },
 
   // returns an array with specified values excluded
-  difference: function() {
-
+  difference: function(arr1, arr2) {
+    for(i = 0; i < arr1.length; i++) {
+      for(j = 0; j < arr2.length; j++) {
+        if(arr1[i] === arr2[j]) {
+          arr1.splice(i, 1);
+        }
+      }
+    }
+    return arr1;
   },
 
   /*******************
    *  STRETCH GOALS! *
-   *******************/ 
+   *******************/
 
   // creates an array of grouped elements
-  zip: function () {
-
+  zip: function (arr1, arr2) {
+    let newArr = [];
+    for(i = 0; i < arr1.length; i++) {
+      let newArr2 = [];
+      newArr2.push(arr1[i], arr2[i]);
+      newArr.push(newArr2);
+    }
+    return newArr;
   },
 
   // creates an array of grouped elements in their pre-zip configuration
-  unzip: function () {
-
+  unzip: function (arr) {
+    let newArr = [];
+    for(i = 0; i < arr[0].length; i++) {
+      let newInnerArr = [];
+      for (j = 0; j < arr.length; j++) {
+        newInnerArr.push(arr[j][i]);
+      }
+      newArr.push(newInnerArr);
+    }
+    return newArr;
   },
 
   // creates an array of elements into groups of length of specified size
-  chunk: function(){
-
+  chunk: function(arr, size){
+    let newArr = [];
+    if(size === 0) {
+      return newArr;
+    } else if(arr.length === 0) {
+      return newArr;
+    } else if(size === arr.length || size > arr.length) {
+      newArr.push(arr);
+      return newArr;
+    } else {
+      while(arr.length > 0){
+        newArr.push(arr.splice(0, size));
+      }
+    }
+    return newArr;
   },
 
   // iterates over elements of a collection and invokes iteratee for each element
   // Note: this should work for arrays and objects
-  forEach: function() {
-
+  forEach: function(clct, funct) {
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        funct(clct[i]);
+      }
+      return funct;
+    } else if(typeof clct === 'object') {
+      for(let key in clct) {
+        funct(clct[key]);
+      }
+    }
   },
 
   // creates an array of values by running each element in collection thru the iteratee
   // Note: this should work for arrays and objects
-  map: function() {
-
+  map: function(clct, funct) {
+    let arr = [];
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        arr.push(funct(clct[i]));
+      }
+      return arr;
+    } else if(typeof clct === 'object') {
+      for(let key in clct) {
+        arr.push(funct(clct[key]));
+      }
+      return arr;
+    }
   },
 
-  /*************************
-   *  SUPER STRETCH GOALS!  *
-   *************************/ 
+  /*********************************
+   *  SUPER SAIYAN STRETCH GOALS!  *
+   *********************************/
 
   // iterates over elements of a collection and returns all elements that the predicate returns truthy for
   // Note: this should work for arrays and objects
-  filter: function() {
-
+  filter: function(clct, funct) {
+    let arr = [];
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        if(funct(clct[i]) == true) {
+          arr.push(clct[i]);
+        }
+      }
+      return arr;
+    } else if(typeof clct === 'object') {
+      let emptyObj = {};
+      for(let [key] in clct) {
+        if(funct(clct[key]) == true) {
+          emptyObj[key] = clct[key];
+        }
+      }
+      return emptyObj;
+    }
   },
 
   // Reduces the collection to a value which is the accumulated result of running each element
   // in the collection through an iteratee
   // Note: this should work for arrays and objects
-  reduce: function() {
-    
+  reduce: function(clct, funct) {
+    let total = 0;
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        total += clct[i];
+        }
+        return total;
+      } else if(typeof clct === 'object') {
+      for(let [key] in clct) {
+        total += clct[key];
+      }
+      return total;
+    }
   }
 };
