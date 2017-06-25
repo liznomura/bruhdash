@@ -260,14 +260,29 @@ var global = window || GLOBAL;
     }
   },
 
-  /*************************
-   *  SUPER STRETCH GOALS!  *
-   *************************/
+  /*********************************
+   *  SUPER SAIYAN STRETCH GOALS!  *
+   *********************************/
 
   // iterates over elements of a collection and returns all elements that the predicate returns truthy for
   // Note: this should work for arrays and objects
-  filter: function() {
-
+  filter: function(clct, funct) {
+    let arr = [];
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        if(funct(clct[i]) == true) {
+          arr.push(clct[i]);
+        }
+      }
+      return arr;
+    } else if(typeof clct === 'object') {
+      for(let [key] in clct) {
+        if(funct(clct[key]) == true) {
+          arr.push(clct[key]);
+        }
+      }
+      return arr;
+    }
   },
 
   // Reduces the collection to a value which is the accumulated result of running each element
