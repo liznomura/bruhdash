@@ -289,7 +289,18 @@ var global = window || GLOBAL;
   // Reduces the collection to a value which is the accumulated result of running each element
   // in the collection through an iteratee
   // Note: this should work for arrays and objects
-  reduce: function() {
-
+  reduce: function(clct, funct) {
+    let total = 0;
+    if(Array.isArray(clct) === true) {
+      for(i = 0; i < clct.length; i++) {
+        total += clct[i];
+        }
+        return total;
+      } else if(typeof clct === 'object') {
+      for(let [key] in clct) {
+        total += clct[key];
+      }
+      return total;
+    }
   }
 };
