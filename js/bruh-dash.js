@@ -276,12 +276,13 @@ var global = window || GLOBAL;
       }
       return arr;
     } else if(typeof clct === 'object') {
+      let emptyObj = {};
       for(let [key] in clct) {
         if(funct(clct[key]) == true) {
-          arr.push(clct[key]);
+          emptyObj[key] = clct[key];
         }
       }
-      return arr;
+      return emptyObj;
     }
   },
 
